@@ -51,26 +51,3 @@ def log_visitor_count():
 # Skript ausführen
 log_visitor_count()
 
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # Besucherzahl abrufen
-    visitors = get_visitors()
-    
-    # CSV-Datei mit Datum/Uhrzeit und Besucherzahl aktualisieren
-    with open('visitor_log.csv', 'a', newline='') as file:
-        writer = csv.writer(file)
-        # Überschrift hinzufügen, falls die Datei neu ist
-        file.seek(0, 2)  # Datei an das Ende setzen
-        if file.tell() == 0:  # Wenn die Datei leer ist
-            writer.writerow(["Datum und Uhrzeit", "Anzahl Besucher"])
-        
-        # Datenzeile hinzufügen
-        writer.writerow([timestamp, visitors if visitors is not None else "Keine Daten verfügbar"])
-
-# Skript ausführen
-log_visitor_count()
-
-    with open('visitor_log.txt', 'a') as file:
-        file.write(f"{datetime.now()}: {visitors} Besucher\n")
-
-# Skript ausführen
-log_visitor_count()
