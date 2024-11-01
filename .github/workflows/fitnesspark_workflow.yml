@@ -2,7 +2,7 @@ name: Run Visitor Count Script
 
 on:
   schedule:
-  - cron: '*/5 * * * *'  # Läuft alle 5 Minuten
+  - cron: '0,30 * * * *'  # Läuft alle 30 Minuten
   workflow_dispatch:      # Ermöglicht das manuelle Starten des Workflows
 
 jobs:
