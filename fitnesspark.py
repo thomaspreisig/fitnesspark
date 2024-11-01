@@ -3,14 +3,14 @@ import csv
 from datetime import datetime
 
 def get_visitors():
-    # URL für die AJAX-Anfrage
+    # URL für die AJAX-Anfrage mit vollständigen Parametern
     url = 'https://www.fitnesspark.ch/wp/wp-admin/admin-ajax.php'
     
     # Parameter für die Anfrage
     params = {
         'action': 'single_park_update_visitors',  # Der spezifische Action-Parameter
-        'data-park-id': '698',                    # ID des Fitnessparks
-        'data-location-id': '31'                  # Weitere ID, falls benötigt
+        'location_id': '31',                      # ID des Fitnessparks
+        'location_name': 'FP_Glattpark'           # Name der Location
     }
     
     # Header für die Anfrage
@@ -23,11 +23,14 @@ def get_visitors():
     response = requests.get(url, params=params, headers=headers)
     response.raise_for_status()  # Löst eine Ausnahme bei HTTP-Fehlern aus
 
+    # Antwort ausgeben, um zu überprüfen, ob die Besucherzahl enthalten ist
+    print("Antworttext:", response.text)
+    
     # Besucherzahl extrahieren, falls im Text der Antwort eine Zahl enthalten ist
     if response.text.isdigit():
         visitors = int(response.text.strip())
     else:
-        visitors = None  # Falls keine Zahl gefunden wird, wird None zurückgegeben
+        visitors = "Keine Daten verfügbar"  # Falls keine Zahl gefunden wird
     
     return visitors
 
@@ -50,4 +53,3 @@ def log_visitor_count():
 
 # Skript ausführen
 log_visitor_count()
-
