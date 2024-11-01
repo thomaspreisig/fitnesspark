@@ -22,4 +22,4 @@ jobs:
         run: pip install requests beautifulsoup4
 
       - name: Run script
-        run: python fitnesspark/your_script.py
+        run: python fitnesspark/fitnesspark.py
