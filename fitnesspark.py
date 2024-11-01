@@ -1,6 +1,7 @@
 import requests
 import csv
 from datetime import datetime
+import pytz
 
 def get_visitors():
     # URL für die AJAX-Anfrage mit vollständigen Parametern
@@ -35,8 +36,12 @@ def get_visitors():
     return visitors
 
 def log_visitor_count():
-    # Aktuelles Datum und Uhrzeit
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # Zeitzone UTC+1 definieren
+    zurich_timezone = pytz.timezone("Europe/Zurich")
+    
+    # Aktuelles Datum und Uhrzeit in UTC+1
+    timestamp = datetime.now(zurich_timezone).strftime("%Y-%m-%d %H:%M:%S")
+    
     # Besucherzahl abrufen
     visitors = get_visitors()
     
