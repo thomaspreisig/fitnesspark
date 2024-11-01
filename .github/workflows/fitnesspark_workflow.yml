@@ -2,8 +2,8 @@ name: Run Visitor Count Script
 
 on:
   schedule:
-    - cron: '0/5 * * * *'  # Läuft jede Stunde
-  workflow_dispatch:      # Fügt die Option hinzu, den Workflow manuell zu starten
+    - cron: '0/30 * * * *'  # Läuft jede halbe Stunde
+  workflow_dispatch:      # Ermöglicht das manuelle Starten des Workflows
 
 jobs:
   run-script:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Updated to v3
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4  # Updated to v4
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -23,3 +23,11 @@ jobs:
 
       - name: Run script
         run: python fitnesspark.py
+
+      - name: Commit visitor log
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add visitor_log.csv
+          git commit -m "Update visitor log"
+          git push
