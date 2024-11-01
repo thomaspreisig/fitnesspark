@@ -16,8 +16,8 @@ jobs:
         with:          
           python-version: '3.x'       
       - name: Install dependencies        
-        run: pip install requests beautifulsoup4       
-          pip install pytz  # Fügt pytz hinzu
+        run: |
+          pip install requests beautifulsoup4 pytz  # Installiert alle benötigten Pakete
       - name: Run script        
         run: python fitnesspark.py       
       - name: Commit visitor log        
