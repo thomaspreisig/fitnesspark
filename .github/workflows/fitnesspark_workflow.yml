@@ -2,7 +2,8 @@ name: Run Visitor Count Script
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Jede Stunde ausführen
+    - cron: '0/5 * * * *'  # Läuft alle 5 min.
+  workflow_dispatch:      # Fügt die Option hinzu, den Workflow manuell zu starten
 
 jobs:
   run-script:
@@ -21,4 +22,4 @@ jobs:
         run: pip install requests beautifulsoup4
 
       - name: Run script
-        run: python your_script.py
+        run: python fitnesspark/your_script.py
