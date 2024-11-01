@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 def get_visitors():
-    url = 'URL_DER_WEBSEITE'  # Ersetze dies durch die tatsächliche URL der Seite
+    url = 'https://www.fitnesspark.ch/wp/wp-admin/admin-ajax.php'  # Ersetze dies durch die tatsächliche URL der Seite
     response = requests.get(url)
     response.raise_for_status()  # Fehlerbehandlung
 
