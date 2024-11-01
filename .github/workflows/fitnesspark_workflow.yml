@@ -1,33 +1,28 @@
 name: Run Visitor Count Script
-
-on:
-  schedule:
-  - cron: '0,30 * * * *'  # Läuft alle 30 Minuten
+on:  
+  schedule: 
+    - cron: '0 5-21 * * *'   # Läuft stündlich von 05:00 bis 22:00 Uhr
+    - cron: '30 5-20 * * *'  # Läuft alle 30 Minuten von 05:30 bis 21:30 Uhr
   workflow_dispatch:      # Ermöglicht das manuelle Starten des Workflows
 
-jobs:
-  run-script:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: pip install requests beautifulsoup4
-
-      - name: Run script
-        run: python fitnesspark.py
-
-      - name: Commit visitor log
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add visitor_log.csv
-          git commit -m "Update visitor log"
+jobs:  
+  run-script:    
+    runs-on: ubuntu-latest     
+    steps:      
+      - name: Checkout repository        
+        uses: actions/checkout@v3       
+      - name: Set up Python        
+        uses: actions/setup-python@v4        
+        with:          
+          python-version: '3.x'       
+      - name: Install dependencies        
+        run: pip install requests beautifulsoup4       
+      - name: Run script        
+        run: python fitnesspark.py       
+      - name: Commit visitor log        
+        run: |          
+          git config --global user.name "github-actions[bot]"          
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"          
+          git add visitor_log.csv          
+          git commit -m "Update visitor log"          
           git push
